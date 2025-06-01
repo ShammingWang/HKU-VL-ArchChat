@@ -1331,6 +1331,7 @@
 												{/if}
 
 												{#if showCodeInterpreterButton}
+												<!--
 													<Tooltip content={$i18n.t('Execute code for analysis')} placement="top">
 														<button
 															on:click|preventDefault={() =>
@@ -1347,6 +1348,7 @@
 															>
 														</button>
 													</Tooltip>
+												-->	
 												{/if}
 											</div>
 										{/if}
