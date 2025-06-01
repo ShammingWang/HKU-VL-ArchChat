@@ -39,5 +39,9 @@ export default defineConfig({
 	},
 	worker: {
 		format: 'es'
+	},
+	server: {
+		host: true, // 监听 0.0.0.0，允许局域网或公网访问
+		allowedHosts: ['archhku.shamming.cn'] // 添加允许的域名
 	}
 });
