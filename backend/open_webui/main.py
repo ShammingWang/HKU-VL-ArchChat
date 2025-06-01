@@ -1056,7 +1056,13 @@ async def inspect_websocket(request: Request, call_next):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=CORS_ALLOW_ORIGIN,
+    # allow_origins=CORS_ALLOW_ORIGIN,
+    # allow_origin_regex=".*",  # 允许所有 Origin
+    allow_origins=[
+        "http://archhku.shamming.cn",
+        "http://192.168.5.6:5173",  # 本地调试用
+        "http://localhost:5173"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
