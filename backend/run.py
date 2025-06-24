@@ -1,11 +1,14 @@
 # run.py
-
 import os
+from dotenv import load_dotenv
 import uvicorn
 
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8080))
+load_dotenv(dotenv_path=".env.development")
 
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))
+    print(os.getenv("DATA_DIR"))
     uvicorn.run(
         "open_webui.main:app",
         host="0.0.0.0",
