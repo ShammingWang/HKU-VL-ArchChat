@@ -27,14 +27,16 @@ ARG BUILD_HASH
 WORKDIR /app
 
 # to store git revision in build
-RUN apk add --no-cache git
+RUN apk add --no-cache git && \
+    corepack enable && corepack prepare pnpm@latest --activate
 
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 ENV APP_BUILD_HASH=${BUILD_HASH}
-RUN npm run build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+RUN pnpm run build
 
 ######## WebUI backend ########
 FROM python:3.11-slim-bookworm AS base

@@ -1,34 +1,20 @@
-services:
-  ollama:
-    volumes:
-      - ollama:/root/.ollama
-    container_name: ollama
-    pull_policy: always
-    tty: true
-    restart: unless-stopped
-    image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
+version: "3.8"
 
-  open-webui:
+services:
+  hku-vl-chat:
+    container_name: hku-vl-chat
+    image: hku-vl-chat:latest
     build:
       context: .
-      args:
-        OLLAMA_BASE_URL: '/ollama'
       dockerfile: Dockerfile
-    image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
-    container_name: open-webui
-    volumes:
-      - open-webui:/app/backend/data
-    depends_on:
-      - ollama
+      args:
+        USE_OLLAMA: "false"
     ports:
-      - ${OPEN_WEBUI_PORT-3000}:8080
-    environment:
-      - 'OLLAMA_BASE_URL=http://ollama:11434'
-      - 'WEBUI_SECRET_KEY='
-    extra_hosts:
-      - host.docker.internal:host-gateway
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./backend/data:/app/backend/data
     restart: unless-stopped
 
-volumes:
-  ollama: {}
-  open-webui: {}
+    
