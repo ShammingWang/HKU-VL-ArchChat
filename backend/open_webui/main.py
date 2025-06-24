@@ -1060,6 +1060,7 @@ app.add_middleware(
     # allow_origin_regex=".*",  # 允许所有 Origin
     allow_origins=[
         "http://archhku.shamming.cn",
+        "http://archhku.shamming.cn:5173", # dev
         "http://192.168.5.6:5173",  # 本地调试用
         "http://localhost:5173"
     ],
